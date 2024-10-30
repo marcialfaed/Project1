@@ -1,7 +1,7 @@
 import streamlit as st
 
 # Sidebar for navigation
-st.sidebar.title("Navigation")
+st.sidebar.title("Rosto vodka restaurant")
 tab = st.sidebar.radio("Select a tab", ["Menu", "About", "Contact", "Billing Method"])
 
 if tab == "Menu":
