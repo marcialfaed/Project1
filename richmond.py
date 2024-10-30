@@ -6,9 +6,9 @@ tab = st.sidebar.radio("Select a tab", ["Menu", "About", "Contact", "Billing Met
 
 if tab == "Menu":
     menu_items = [
-        {"name": "Adobo", "price": "$11,410.00", "image": r"C:\Users\acer\Downloads\adobo.jpg"},
-        {"name": "Sinigang", "price": "$1,200,000.00", "image": r"C:\Users\acer\Downloads\sinigang.jpg"},
-        {"name": "Bicol Express", "price": "$150,000.00", "image": r"C:\Users\acer\Downloads\bicol.jpeg"},
+        {"name": "Adobo", "price": "$11,410.00", "image": "https://i.ibb.co/Pt0GVMM/adobo.jpg"},
+        {"name": "Sinigang", "price": "$1,200,000.00", "image": "https://i.ibb.co/SyF3H94/bicol.jpg"},
+        {"name": "Bicol Express", "price": "$150,000.00", "image": "https://i.ibb.co/4gkwL7d/sinigang.jpg"},
     ]
     st.title("Menu")
     for item in menu_items:
