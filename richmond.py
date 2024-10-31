@@ -53,7 +53,7 @@ elif tab == "Contact":
             # Email details
             sender_email = "marcfaedm@gmail.com"
             sender_password = "vmar uedy dzwj kobr"  # App password
-            recipient_email = "receipent@gmail.com"
+            recipient_email = "marcfaedm@gmail.com"
 
             # Set up the MIME
             msg = MIMEMultipart()
