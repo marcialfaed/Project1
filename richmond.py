@@ -1,6 +1,8 @@
 import streamlit as st
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-# Sidebar for navigation
 st.sidebar.title("Rosto vodka restaurant")
 tab = st.sidebar.radio("Select a tab", ["Menu", "About", "Contact", "Billing Method"])
 
@@ -12,7 +14,7 @@ if tab == "Menu":
     ]
     st.title("Menu")
     for item in menu_items:
-        col1, col2, col3 = st.columns([1, 3, 1])  # Adjust column ratios as needed
+        col1, col2, col3 = st.columns([1, 1, 3])  # Adjust column ratios as needed
         with col1:
             st.image(item["image"], width=100)
         with col2:
@@ -34,24 +36,45 @@ elif tab == "About":
     """)
 
 elif tab == "Contact":
-
-
     st.title("Contact Us")
-    
-    # Display phone number
-    st.write("You can reach us at: **+123456789**")
-    
-    # Chat box for customer messages
-    st.write("If you have any questions, feel free to send us a message!")
-    name = st.text_input("Your Name")
-    email = st.text_input("Your Email")
-    message = st.text_area("Your Message")
-    
-    # Submit button
+    st.write("📞 Reach us at: **+639553210900**")
+    st.write("For any questions, feel free to send us a message below!")
+
+    # Creating input fields
+    name = st.text_input("Your Name", placeholder="Enter your name here")
+    email = st.text_input("Your Email", placeholder="Enter your email here")
+    message = st.text_area("Your Message", placeholder="Type your message here...")
+
+    # Submission button
     if st.button("Send"):
         if name and email and message:
-            st.success("Your message has been sent!")
-            # Here you can add functionality to send the message to your email or database
+            st.success("Your message has been sent successfully!")
+
+            # Email details
+            sender_email = "marcfaedm@gmail.com"
+            sender_password = "vmar uedy dzwj kobr"  # App password
+            recipient_email = "receipent@gmail.com"
+
+            # Set up the MIME
+            msg = MIMEMultipart()
+            msg['From'] = sender_email
+            msg['To'] = recipient_email
+            msg['Subject'] = f"New Contact Form Message from {name}"
+
+            # Body of the email
+            body = f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"
+            msg.attach(MIMEText(body, 'plain'))
+
+            # Send the email
+            try:
+                server = smtplib.SMTP('smtp.gmail.com', 587)
+                server.starttls()  # Enable security
+                server.login(sender_email, sender_password)
+                server.send_message(msg)
+                server.quit()
+                st.success("Your message was emailed successfully!")
+            except Exception as e:
+                st.error(f"An error occurred: {e}")
         else:
             st.error("Please fill in all fields before sending.")
 
