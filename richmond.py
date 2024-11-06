@@ -4,12 +4,22 @@ from about import about_page
 from contact import contact_page
 from billing import billing_page
 
-# Create a top navigation bar at the top-right position
-st.set_page_config(layout="wide")  # To allow full-width layouts
+# Set wide layout
+st.set_page_config(layout="wide")  # Allows full-width layouts
 
-# Navigation menu at the top
+
+# Retrieve the current tab from query parameters, or default to "Home (Menu)"
+tab = st.query_params.get("tab", "Home (Menu)")
+
+
+# Navigation menu with query parameters
 nav_options = ["Home (Menu)", "About", "Contact", "Billing Method"]
-selected_tab = st.selectbox("Navigate", nav_options, index=0, key="top_nav", label_visibility="collapsed")
+selected_tab = st.selectbox("Navigate", nav_options, index=nav_options.index(tab), key="top_nav", label_visibility="collapsed")
+
+
+# Update query parameter whenever the tab is changed
+st.query_params.tab = selected_tab
+
 
 # Display the selected page content
 if selected_tab == "Home (Menu)":
